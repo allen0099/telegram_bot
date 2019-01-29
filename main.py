@@ -5,9 +5,8 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 from telegram.utils.request import Request
 
-from command.ping import ping
-from command.info import info
-from message.admin import admin
+from command import ping, info
+from message import admin
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -50,5 +49,5 @@ def main(token):
 if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('config.ini')
-    token = config.get('bot', 'hexu')
+    token = config.get('bot', 'token')
     main(token)
