@@ -5,8 +5,8 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 from telegram.utils.request import Request
 
-from command import ping, info
-from message import admin
+from command import c_admin, info, ping
+from message import m_admin
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -24,11 +24,12 @@ def main(token):
     updater = Updater(bot=bot, workers=120)
 
     # Command Handlers
-    updater.dispatcher.add_handler(CommandHandler('ping', ping))
+    updater.dispatcher.add_handler(CommandHandler('admin', c_admin))
     updater.dispatcher.add_handler(CommandHandler('info', info))
+    updater.dispatcher.add_handler(CommandHandler('ping', ping))
 
     # Message Handlers
-    updater.dispatcher.add_handler(MessageHandler(Filters.regex('@admin'), admin))
+    updater.dispatcher.add_handler(MessageHandler(Filters.regex('@admin'), m_admin))
 
     # Error and the others, must at the end
     updater.dispatcher.add_error_handler(error)
