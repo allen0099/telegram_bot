@@ -1,1 +1,1 @@
-from .admin import m_admin
+from .admin import admin

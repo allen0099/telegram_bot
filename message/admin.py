@@ -1,7 +1,7 @@
 from telegram.ext import Filters
 
 
-def m_admin(bot, update):
+def admin(bot, update):
     if Filters.group(update.message):
         admins = bot.get_chat_administrators(update.message.chat.id)
         mention = ''
