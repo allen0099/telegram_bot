@@ -24,6 +24,7 @@ def info(bot, update):
         text += '<code>--Reply Info--</code>\n' \
             f'Reply Sent Time: <code>{update.message.reply_to_message.date} +08:00</code>\n' \
             f'Reply to ID: <code>{update.message.reply_to_message.message_id}</code>\n' \
+            f'UID: <code>{update.message.reply_to_message.from_user.id}</code>\n' \
             f'Is Bot: <code>{update.message.reply_to_message.from_user.is_bot}</code>\n' \
             f'First Name: <code>{update.message.reply_to_message.from_user.first_name}</code>\n'
         if update.message.reply_to_message.from_user.last_name is not None:
