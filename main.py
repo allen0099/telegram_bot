@@ -5,7 +5,7 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 from telegram.utils.request import Request
 
-from command import admins, info, ping, delete_msg
+from command import admins, convert, delete_msg, info, ping
 from message import admin
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -25,6 +25,7 @@ def main(token):
 
     # Command Handlers
     updater.dispatcher.add_handler(CommandHandler('admins', admins, pass_args=True))
+    updater.dispatcher.add_handler(CommandHandler('convert', convert, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('del', delete_msg))
     updater.dispatcher.add_handler(CommandHandler('info', info))
     updater.dispatcher.add_handler(CommandHandler('ping', ping))
