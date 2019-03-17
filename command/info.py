@@ -8,7 +8,7 @@ def info(bot, update):
     # for some condition :3
     if update.message:
         msg = update.message
-    elif update.edit_message:
+    elif update.edited_message:
         msg = update.edited_message
     else:
         return
