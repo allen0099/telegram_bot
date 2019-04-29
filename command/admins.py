@@ -14,7 +14,7 @@ def admins(bot, update, args):
             administrator = list()  # Administrators is not set now
 
             # Make sure Creator is not in list
-            for u in bot.get_chat_administrators(args[0]):
+            for u in bot.get_chat_administrators(update.message.chat.id):
                 if u.status != 'creator':
                     administrator.append(u)
                 else:
