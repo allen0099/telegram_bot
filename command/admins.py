@@ -2,12 +2,31 @@ from telegram import TelegramError
 from telegram.ext import Filters
 
 
+def sort_key(elem):
+    return elem.user.id
+
+
 def admins(bot, update, args):
     if len(args) == 0:
         if Filters.group(update.message):
-            admins = bot.get_chat_administrators(update.message.chat.id)
-            mention = ''
-            for users in reversed(admins):
+            mention = 'Current group:\n'
+            creator = None  # Creator is not set now
+            administrator = list()  # Administrators is not set now
+
+            # Make sure Creator is not in list
+            for u in bot.get_chat_administrators(args[0]):
+                if u.status != 'creator':
+                    administrator.append(u)
+                else:
+                    creator = u  # Set creator
+
+            admins = [creator]  # Make creator in 0
+            administrator.sort(key=sort_key)
+
+            for u in administrator:
+                admins.append(u)
+
+            for users in admins:
                 if users.status == 'creator':
                     mention += 'Creator: ' + users.user.mention_html() + '\n'
                     continue
@@ -42,11 +61,27 @@ def admins(bot, update, args):
                              text=mention,
                              parse_mode='HTML')
     elif len(args) == 1:
+        if args[0].startswith('https://t.me/'):
+            args[0] = args[0].replace('https://t.me/', '@')
         if args[0].startswith('@') or args[0].startswith('-100'):
             try:
                 mention = 'Admins for the group ' + args[0] + '\n'
-                admins = bot.get_chat_administrators(args[0])
-                for users in reversed(admins):
+                creator = None
+                administrator = list()
+
+                for u in bot.get_chat_administrators(args[0]):
+                    if u.status != 'creator':
+                        administrator.append(u)
+                    else:
+                        creator = u
+
+                admins = [creator]
+                administrator.sort(key=sort_key)
+
+                for u in administrator:
+                    admins.append(u)
+
+                for users in admins:
                     if users.status == 'creator':
                         mention += 'Creator: ' + users.user.mention_html() + '\n'
                         continue
