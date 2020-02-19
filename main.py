@@ -5,7 +5,7 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 from telegram.utils.request import Request
 
-from command import admins, convert, delete_msg, info, ping
+from command import *
 from message import admin
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
