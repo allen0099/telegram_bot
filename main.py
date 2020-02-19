@@ -31,8 +31,7 @@ def main(token):
     updater.dispatcher.add_handler(CommandHandler('ping', ping))
 
     # Message Handlers
-    updater.dispatcher.add_handler(MessageHandler(Filters.document, file))
-    updater.dispatcher.add_handler(MessageHandler(Filters.regex('@admin'), admin))
+    updater.dispatcher.add_handler(MessageHandler(Filters.regex('^@admin$'), admin))
 
     # Error and the others, must at the end
     updater.dispatcher.add_error_handler(error)
